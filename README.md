@@ -30,7 +30,7 @@ Adjustments: [if Edited=Yes, explain changes]
 2. **Generate the label** when done: "Generate the Provenance Label"
 3. **Add it to your work** (bottom of posts, README, artist statements, etc.)
 
-Or use the [Label Generator](https://provenancelabel.com) on the website.
+Or use the [Label Generator](https://provenance-label.github.io/provenance-label/#standard) on the website.
 
 ## Why This Exists
 
@@ -89,7 +89,7 @@ This is an open standard. Contributions welcome!
 
 Created by [Shelton Davis](https://github.com/shelton) in February 2026.
 
-Website: [provenancelabel.com](https://provenancelabel.com)
+Website: [provenancelabel.com](https://provenance-label.github.io/provenance-label/#standard)
 ```
 
 ---
@@ -162,5 +162,5 @@ RULES:
 - Free to use, modify, distribute with attribution
 
 MORE INFO:
-https://provenancelabel.com
+https://provenance-label.com
 https://github.com/provenance-label/provenance-label

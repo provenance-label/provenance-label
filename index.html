@@ -223,6 +223,41 @@
             flex-wrap: wrap;
         }
 
+        /* Prompt Section */
+        .prompt-section {
+          margin: 3rem 0;
+          padding: 2rem;
+          background: #f8f9fa;
+          border-left: 4px solid #333;
+        }
+
+        .prompt-box {
+          position: relative;
+          margin-top: 1rem;
+        }
+
+        .prompt-box pre {
+          background: #fff;
+          padding: 1.5rem;
+          border: 1px solid #ddd;
+          border-radius: 4px;
+          overflow-x: auto;
+        }
+
+        .prompt-box button {
+          margin-top: 1rem;
+          padding: 0.5rem 1rem;
+          background: #333;
+          color: #fff;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+        }
+
+        .prompt-box button:hover {
+          background: #555;
+        }
+
         /* Examples */
         .example {
             background: #f5f5f5;
@@ -386,6 +421,31 @@ Adjustments: [if Edited=Yes, explain changes]</div>
                     <li>Free to use, modify, distribute</li>
                 </ul>
             </div>
+        </section>
+        <!-- AI Prompt Generator Section -->
+        <section class="prompt-section">
+          <h2>Generate Your Label</h2>
+          <p>Copy this prompt into your AI at the end of your collaboration:</p>
+
+          <div class="prompt-box">
+            <pre><code>Create a Provenance Label v1.0 for the content we produced in this conversation.
+
+        Format:
+        **Provenance Label v1.0**
+        - Human Contribution: [X]%
+        - AI Contribution: [Y]%
+        - Collaboration Method: [description]
+        - AI Tool(s): [your name and version]
+        - Human Roles: [specific actions taken]
+        - AI Roles: [specific actions taken]
+
+        Requirements:
+        - Calculate percentages based on actual contribution (ideation, drafting, editing, decision-making)
+        - Be specific about methods (prompting, iterative editing, research, code generation)
+        - List concrete roles, not abstractions
+        - Output only the label, ready to copy-paste</code></pre>
+            <button onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent)">Copy Prompt</button>
+          </div>
         </section>
 
         <!-- Generator -->
