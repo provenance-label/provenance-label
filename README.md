@@ -89,7 +89,7 @@ This is an open standard. Contributions welcome!
 
 Created by [Shelton Davis](https://github.com/shelton) in February 2026.
 
-Website: [provenancelabel.com](https://provenance-label.github.io/provenance-label/#standard)
+Website: [provenancelabel.org](http://www.provenancelabel.org)
 ```
 
 ---
@@ -163,4 +163,4 @@ RULES:
 
 MORE INFO:
 https://provenancelabel.com
-https://github.com/provenance-label/provenance-label
+https://github.com/provenancelabel/provenancelabel
