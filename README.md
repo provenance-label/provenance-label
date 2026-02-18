@@ -162,5 +162,5 @@ RULES:
 - Free to use, modify, distribute with attribution
 
 MORE INFO:
-https://provenance-label.com
+https://provenancelabel.com
 https://github.com/provenance-label/provenance-label

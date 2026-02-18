@@ -3,559 +3,410 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Provenance Label - A Nutrition Label for AI-Assisted Content</title>
+    <title>Provenance Label — A nutrition label for AI-assisted content</title>
     <meta name="description" content="Open standard for transparent disclosure of AI collaboration in creative work. Simple, honest, free.">
+    <link rel="stylesheet" href="shared.css">
     <style>
-        /* Reset & Base */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Arial', sans-serif;
-            line-height: 1.6;
-            color: #2d2d2d;
-            background: #ffffff;
-            padding: 20px;
-            max-width: 100%;
-        }
-
-        /* Typography */
-        h1, h2, h3 {
-            font-weight: 700;
-            line-height: 1.2;
-            margin-bottom: 1rem;
-        }
-
-        h1 { font-size: 2.5rem; }
-        h2 { font-size: 1.8rem; margin-top: 3rem; }
-        h3 { font-size: 1.3rem; margin-top: 2rem; }
-
-        p { margin-bottom: 1rem; }
-
-        code {
-            font-family: 'Courier New', monospace;
-            background: #f5f5f5;
-            padding: 2px 6px;
-            border-radius: 3px;
-            font-size: 0.9em;
-        }
-
-        /* Container */
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        /* Nutrition Label Aesthetic */
-        .label-box {
-            border: 3px solid #000;
-            padding: 20px;
-            margin: 30px 0;
-            background: #fff;
-        }
-
-        .label-header {
-            border-bottom: 8px solid #000;
-            padding-bottom: 8px;
-            margin-bottom: 15px;
-        }
-
-        .label-header h2 {
-            font-size: 2.2rem;
-            font-weight: 900;
-            text-transform: uppercase;
-            margin: 0;
-            letter-spacing: 1px;
-        }
-
-        .label-section {
-            border-top: 1px solid #000;
-            padding: 15px 0;
-        }
-
-        .label-section:first-child {
-            border-top: none;
-        }
-
-        .label-row {
-            display: flex;
-            justify-content: space-between;
-            padding: 8px 0;
-            border-bottom: 1px solid #ccc;
-        }
-
-        .label-row:last-child {
-            border-bottom: none;
-        }
-
-        .label-row strong {
-            font-weight: 700;
-        }
-
-        /* Hero Section */
         .hero {
-            text-align: center;
-            padding: 60px 20px;
-            border: 3px solid #000;
-            margin-bottom: 40px;
+            padding: 72px 0 64px;
+            border-bottom: 1px solid var(--gray-mid);
+        }
+
+        .hero-eyebrow {
+            font-family: var(--mono);
+            font-size: 11px;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 20px;
         }
 
         .hero h1 {
-            font-size: 3rem;
-            font-weight: 900;
+            font-size: 44px;
+            margin-bottom: 24px;
+            max-width: 580px;
+        }
+
+        .hero-sub {
+            font-size: 18px;
+            color: var(--gray-dark);
+            max-width: 520px;
+            margin-bottom: 36px;
+            line-height: 1.6;
+        }
+
+        .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
+
+        .btn {
+            font-family: var(--mono);
+            font-size: 12px;
+            letter-spacing: 0.08em;
             text-transform: uppercase;
-            margin-bottom: 10px;
-            letter-spacing: 2px;
-        }
-
-        .hero .tagline {
-            font-size: 1.3rem;
-            color: #666;
-            margin-bottom: 20px;
-            font-style: italic;
-        }
-
-        .hero .subtitle {
-            font-size: 1.1rem;
-            margin-bottom: 30px;
-            line-height: 1.8;
-        }
-
-        /* Buttons */
-        .button {
-            display: inline-block;
-            padding: 12px 30px;
-            margin: 10px;
-            background: #2d2d2d;
-            color: #fff;
             text-decoration: none;
-            border: 2px solid #000;
-            font-weight: 700;
-            text-transform: uppercase;
-            font-size: 0.9rem;
+            padding: 12px 24px;
+            border: 1px solid var(--black);
+            color: var(--white);
+            background: var(--black);
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.15s;
+            display: inline-block;
         }
 
-        .button:hover {
-            background: #fff;
-            color: #2d2d2d;
-        }
+        .btn:hover { background: var(--accent); border-color: var(--accent); color: var(--white); }
 
-        .button-secondary {
-            background: #fff;
-            color: #2d2d2d;
-        }
+        .btn-ghost { background: transparent; color: var(--black); }
+        .btn-ghost:hover { background: var(--black); color: var(--white); }
 
-        .button-secondary:hover {
-            background: #2d2d2d;
-            color: #fff;
-        }
-
-        /* Generator Form */
-        .generator {
-            border: 3px solid #000;
-            padding: 30px;
-            margin: 40px 0;
-            background: #fafafa;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        label {
-            display: block;
-            font-weight: 700;
-            margin-bottom: 5px;
-            text-transform: uppercase;
-            font-size: 0.85rem;
-            letter-spacing: 0.5px;
-        }
-
-        input, textarea, select {
-            width: 100%;
-            padding: 10px;
-            border: 2px solid #2d2d2d;
-            font-family: inherit;
-            font-size: 1rem;
-        }
-
-        textarea {
-            min-height: 100px;
-            font-family: 'Courier New', monospace;
-        }
-
-        .percentage-group {
+        .philosophy {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 0;
+            border: 1px solid var(--gray-mid);
+            margin: 52px 0;
         }
 
-        .checkbox-group {
-            display: flex;
-            align-items: center;
-            gap: 10px;
+        .phil-item {
+            padding: 28px 24px;
+            border-right: 1px solid var(--gray-mid);
         }
 
-        .checkbox-group input[type="checkbox"] {
-            width: auto;
+        .phil-item:last-child { border-right: none; }
+
+        .phil-label {
+            font-family: var(--mono);
+            font-size: 10px;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 8px;
         }
 
-        #output {
-            background: #fff;
-            border: 2px solid #000;
-            padding: 20px;
-            margin-top: 20px;
-            font-family: 'Courier New', monospace;
-            white-space: pre-wrap;
-            font-size: 0.9rem;
+        .phil-item p { font-size: 15px; color: var(--gray-dark); margin: 0; line-height: 1.5; }
+
+        .section-divider { border: none; border-top: 1px solid var(--gray-mid); margin: 52px 0; }
+
+        .steps { counter-reset: steps; margin: 20px 0 32px; }
+
+        .step {
+            counter-increment: steps;
+            display: grid;
+            grid-template-columns: 40px 1fr;
+            gap: 20px;
+            padding: 24px 0;
+            border-bottom: 1px solid var(--gray-light);
+            align-items: start;
+        }
+
+        .step:last-child { border-bottom: none; }
+
+        .step-num {
+            font-family: var(--mono);
+            font-size: 20px;
+            font-weight: bold;
+            color: var(--gray-mid);
+            padding-top: 2px;
+        }
+
+        .step-num::before { content: counter(steps, decimal-leading-zero); }
+
+        .step-content h3 { margin-top: 0; margin-bottom: 6px; font-size: 15px; }
+        .step-content p { font-size: 15px; color: var(--gray-dark); margin: 0; }
+
+        .prompt-wrap { position: relative; margin: 20px 0 32px; }
+
+        .prompt-wrap pre {
+            background: var(--black);
+            color: #e8e4de;
+            font-family: var(--mono);
+            font-size: 13px;
             line-height: 1.8;
+            padding: 28px 32px;
+            border-radius: 3px;
+            margin: 0;
         }
 
-        .output-buttons {
-            margin-top: 15px;
+        .copy-btn {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            font-family: var(--mono);
+            font-size: 11px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            background: var(--white);
+            color: var(--black);
+            border: 1px solid var(--gray-mid);
+            padding: 6px 12px;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+
+        .copy-btn:hover { background: var(--accent); color: var(--white); border-color: var(--accent); }
+        .copy-btn.copied { background: #2a7a4b; color: var(--white); border-color: #2a7a4b; }
+
+        .output-toggle {
             display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
+            border: 1px solid var(--gray-mid);
+            width: fit-content;
+            margin-bottom: 0;
         }
 
-        /* Prompt Section */
-        .prompt-section {
-          margin: 3rem 0;
-          padding: 2rem;
-          background: #f8f9fa;
-          border-left: 4px solid #333;
+        .toggle-btn {
+            font-family: var(--mono);
+            font-size: 11px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            padding: 8px 20px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            color: var(--gray-dark);
+            transition: all 0.15s;
         }
 
-        .prompt-box {
-          position: relative;
-          margin-top: 1rem;
-        }
+        .toggle-btn.active { background: var(--black); color: var(--white); }
 
-        .prompt-box pre {
-          background: #fff;
-          padding: 1.5rem;
-          border: 1px solid #ddd;
-          border-radius: 4px;
-          overflow-x: auto;
-        }
+        .output-panel { display: none; }
+        .output-panel.active { display: block; }
 
-        .prompt-box button {
-          margin-top: 1rem;
-          padding: 0.5rem 1rem;
-          background: #333;
-          color: #fff;
-          border: none;
-          border-radius: 4px;
-          cursor: pointer;
-        }
-
-        .prompt-box button:hover {
-          background: #555;
-        }
-
-        /* Examples */
-        .example {
-            background: #f5f5f5;
-            border: 2px solid #666;
-            padding: 20px;
-            margin: 20px 0;
-            font-family: 'Courier New', monospace;
-            font-size: 0.85rem;
-            line-height: 1.8;
+        .example-block {
+            background: var(--gray-light);
+            border-left: 3px solid var(--gray-mid);
+            padding: 24px 28px;
+            margin: 8px 0 28px;
+            font-family: var(--mono);
+            font-size: 13px;
+            line-height: 1.9;
             white-space: pre-wrap;
         }
 
-        /* FAQ */
-        .faq-item {
-            margin-bottom: 30px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid #ccc;
+        .example-label {
+            font-family: var(--mono);
+            font-size: 10px;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--gray-dark);
+            margin-bottom: 6px;
         }
 
-        .faq-item:last-child {
-            border-bottom: none;
+        .label-badge {
+            display: inline-block;
+            font-family: var(--mono);
+            font-size: 12px;
+            background: var(--gray-light);
+            border: 1px solid var(--gray-mid);
+            padding: 8px 14px;
+            border-radius: 2px;
+            margin: 6px 0 20px;
         }
 
-        .faq-item h3 {
-            margin-top: 0;
+        .faq-item { padding: 24px 0; border-bottom: 1px solid var(--gray-light); }
+        .faq-item:last-child { border-bottom: none; }
+        .faq-item h3 { margin-top: 0; margin-bottom: 8px; font-size: 15px; }
+        .faq-item p { font-size: 15px; color: var(--gray-dark); margin: 0; }
+
+        .pl-self { border: 1px solid var(--gray-mid); border-radius: 3px; overflow: hidden; margin: 20px 0; }
+
+        .pl-self-header {
+            background: var(--black);
+            color: var(--white);
+            font-family: var(--mono);
+            font-size: 11px;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 12px 20px;
         }
 
-        /* Footer */
-        footer {
-            margin-top: 60px;
-            padding-top: 40px;
-            border-top: 3px solid #000;
-            text-align: center;
-            color: #666;
+        .pl-self-body {
+            padding: 20px;
+            font-family: var(--mono);
+            font-size: 13px;
+            line-height: 1.9;
+            color: var(--gray-dark);
+            white-space: pre-wrap;
         }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 2rem; }
-            .hero .tagline { font-size: 1.1rem; }
-            h1 { font-size: 2rem; }
-            h2 { font-size: 1.5rem; }
-            .percentage-group {
-                grid-template-columns: 1fr;
-            }
-            .button {
-                display: block;
-                margin: 10px 0;
-            }
+        @media (max-width: 600px) {
+            .hero h1 { font-size: 30px; }
+            .philosophy { grid-template-columns: 1fr; }
+            .phil-item { border-right: none; border-bottom: 1px solid var(--gray-mid); }
+            .phil-item:last-child { border-bottom: none; }
+            .step { grid-template-columns: 32px 1fr; gap: 12px; }
         }
-
-        /* Utility */
-        .text-center { text-align: center; }
-        .mt-1 { margin-top: 1rem; }
-        .mt-2 { margin-top: 2rem; }
-        .mb-1 { margin-bottom: 1rem; }
-        .hidden { display: none; }
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Hero -->
-        <div class="hero">
-            <h1>Provenance Label</h1>
-            <p class="tagline">A nutrition label for AI-assisted content</p>
-            <p class="subtitle">
-                Transparency over perfection. Disclosure over certification.<br>
-                <strong>If you made it with AI, show your work.</strong>
-            </p>
-            <a href="#generator" class="button">Generate Your Label</a>
-            <a href="#standard" class="button button-secondary">Read the Standard</a>
+
+    <nav>
+        <a href="/" class="logo">PROVENANCE LABEL</a>
+        <a href="/spec">Spec</a>
+        <a href="https://github.com/provenance-label/provenance-label" target="_blank">GitHub</a>
+        <a href="#about">About</a>
+    </nav>
+
+    <div class="page-wrap">
+
+        <section class="hero">
+            <div class="hero-eyebrow">Open Standard · v1.0 · Free Forever</div>
+            <h1>A nutrition label for AI-assisted content</h1>
+            <p class="hero-sub">Transparency over perfection. If you made it with AI, show your work.</p>
+            <div class="hero-actions">
+                <a href="#generate" class="btn">Generate Your Label</a>
+                <a href="/spec" class="btn btn-ghost">Read the Spec →</a>
+            </div>
+        </section>
+
+        <div class="philosophy">
+            <div class="phil-item">
+                <div class="phil-label">Not anti-AI</div>
+                <p>AI collaboration is here. Transparency makes it legitimate.</p>
+            </div>
+            <div class="phil-item">
+                <div class="phil-label">Not a quality cert</div>
+                <p>Disclosure, not judgment. Like a nutrition label — informative, not prescriptive.</p>
+            </div>
+            <div class="phil-item">
+                <div class="phil-label">Human accountable</div>
+                <p>Regardless of AI percentage, a human signs off. That's the point.</p>
+            </div>
         </div>
 
-        <!-- What is this -->
-        <section id="about">
-            <div class="label-box">
-                <div class="label-header">
-                    <h2>What is this?</h2>
+        <hr class="section-divider">
+
+        <h2>How to use it</h2>
+        <div class="steps">
+            <div class="step">
+                <div class="step-num"></div>
+                <div class="step-content">
+                    <h3>Start with intent</h3>
+                    <p>Tell your AI: "Let's use Provenance Label standards. Track our collaboration."</p>
                 </div>
-                <p>The Provenance Label is an <strong>open standard</strong> for disclosing AI collaboration in creative work.</p>
-                <p>Just like nutrition labels tell you what's in your food without judging your choices, Provenance Labels show what's in your content without claiming it's good or bad.</p>
-                <p style="font-size: 1.2rem; font-weight: 700; margin-top: 20px;">It's not anti-AI. It's pro-honesty.</p>
+            </div>
+            <div class="step">
+                <div class="step-num"></div>
+                <div class="step-content">
+                    <h3>Work normally</h3>
+                    <p>Write, create, build. The AI tracks contribution throughout the session.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-num"></div>
+                <div class="step-content">
+                    <h3>Generate the label</h3>
+                    <p>When done, ask: "Generate the Provenance Label." Review, approve, or adjust.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-num"></div>
+                <div class="step-content">
+                    <h3>Add it to your work</h3>
+                    <p>Bottom of posts, READMEs, artist statements — wherever fits your medium.</p>
+                </div>
+            </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <section id="generate">
+            <h2>Generate Your Label</h2>
+            <p>Copy this prompt into your AI at the end of any collaborative session. It calculates percentages and formats the label — you review and approve.</p>
+
+            <div class="prompt-wrap">
+                <pre id="promptText">Based on our collaboration in this session, generate a Provenance Label v1.0.
+
+@provenance 1.0
+author: [my name]
+date: [today YYYY-MM-DD]
+human: [X]
+ai: [Y]
+tools: [your name and version]
+note: [one plain sentence describing how we worked together]
+
+Requirements:
+- human + ai must equal 100
+- Calculate based on: who initiated content, who made decisions,
+  who edited, what percentage of final output came from each
+- Be honest, not flattering
+- Output only the label block above, ready to copy-paste</pre>
+                <button class="copy-btn" id="copyPromptBtn" onclick="copyPrompt()">Copy</button>
+            </div>
+
+            <p style="font-size:15px; color:var(--gray-dark); margin-top:-12px;">Uses <a href="/spec">PLGen syntax</a> — the open format both short and long outputs are generated from.</p>
+
+            <h3>Output formats</h3>
+            <p style="font-size:15px; color:var(--gray-dark); margin-bottom:16px;">The same label, two formats depending on where you're placing it:</p>
+
+            <div class="output-toggle">
+                <button class="toggle-btn active" onclick="showOutput('short', this)">Short</button>
+                <button class="toggle-btn" onclick="showOutput('long', this)">Long</button>
+            </div>
+
+            <div class="output-panel active" id="output-short">
+                <pre><code>PL v1.0 | Shelton Davis | 2026-02-17 | Human 65% · AI 35% · Claude Sonnet 4.6</code></pre>
+                <p style="font-size:14px; color:var(--gray-dark);">Use in: social posts, bylines, inline footers, Substack notes</p>
+            </div>
+
+            <div class="output-panel" id="output-long">
+                <pre><code>─────────────────────────────────────
+PROVENANCE LABEL v1.0
+─────────────────────────────────────
+Author:   Shelton Davis
+Date:     2026-02-17
+Human:    65%
+AI:       35%
+Tools:    Claude Sonnet 4.6
+Note:     Concept and direction human.
+          Draft and structure AI.
+          Edited for voice.
+─────────────────────────────────────
+provenance-label.org/spec</code></pre>
+                <p style="font-size:14px; color:var(--gray-dark);">Use in: blog posts, articles, documentation, research papers</p>
             </div>
         </section>
 
-        <!-- Why it exists -->
-        <section>
-            <h2>Why it exists</h2>
-            <p>A reader recently told me my AI-assisted writing felt "bloated and self-righteous." They were right to spot it. But they deserved to know upfront.</p>
-            <p>We made this label because:</p>
-            <ul style="margin-left: 30px; margin-bottom: 20px;">
-                <li>AI collaboration is here to stay</li>
-                <li>Transparency builds trust</li>
-                <li>Readers/users deserve to know</li>
-                <li>Creators deserve a simple, non-defensive way to disclose</li>
-            </ul>
-            <p>Like B-Corp certification but actually simple. Like a nutrition label but for content.</p>
-        </section>
+        <hr class="section-divider">
 
-        <!-- How to use -->
-        <section>
-            <h2>How to use it</h2>
-
-            <h3>1. Start with intent</h3>
-            <p>At the beginning of your AI session, say:</p>
-            <div class="example">"Let's use Provenance Label standards. Track our collaboration and generate the label when we're done."</div>
-            <p>The AI will track contribution mix, decisions, and edits throughout your work.</p>
-
-            <h3>2. Generate the label</h3>
-            <p>When finished, ask:</p>
-            <div class="example">"Generate the Provenance Label"</div>
-            <p>The AI calculates percentages based on your session. You review and approve or adjust.</p>
-
-            <h3>3. Add it to your work</h3>
-            <p>Bottom of blog posts, README files, artist statements, wherever makes sense.</p>
-
-            <h3>4. That's it</h3>
-            <p>No approval needed. No fees. It's an open standard.</p>
-        </section>
-
-        <!-- The Standard -->
-        <section id="standard">
-            <div class="label-box">
-                <div class="label-header">
-                    <h2>The Standard (v1.0)</h2>
-                </div>
-                <div class="example">PROVENANCE LABEL v1.0
-Created: YYYY-MM-DD HH:MM UTC
-Updated: YYYY-MM-DD HH:MM UTC (optional)
-Edited: Yes/No
-
-Human contribution: [0-100%]
-AI contribution: [0-100%]
-AI models used: [model names]
-
-Process notes: [1-2 sentence description]
-
-Adjustments: [if Edited=Yes, explain changes]</div>
-
-                <h3>How it works:</h3>
-                <div class="label-section">
-                    <div class="label-row">
-                        <span>1. AI tracks collaboration in real-time</span>
-                    </div>
-                    <div class="label-row">
-                        <span>2. AI calculates contribution percentages</span>
-                    </div>
-                    <div class="label-row">
-                        <span>3. Human reviews and approves (or adjusts)</span>
-                    </div>
-                    <div class="label-row">
-                        <span>4. Label gets added to final work</span>
-                    </div>
-                </div>
-
-                <h3 class="mt-2">Rules:</h3>
-                <ul style="margin-left: 30px;">
-                    <li>AI-calculated, human-approved</li>
-                    <li>Percentages should add to 100%</li>
-                    <li>Process notes in plain language</li>
-                    <li>Free to use, modify, distribute</li>
-                </ul>
-            </div>
-        </section>
-        <!-- AI Prompt Generator Section -->
-        <section class="prompt-section">
-          <h2>Generate Your Label</h2>
-          <p>Copy this prompt into your AI at the end of your collaboration:</p>
-
-          <div class="prompt-box">
-            <pre><code>Create a Provenance Label v1.0 for the content we produced in this conversation.
-
-        Format:
-        **Provenance Label v1.0**
-        - Human Contribution: [X]%
-        - AI Contribution: [Y]%
-        - Collaboration Method: [description]
-        - AI Tool(s): [your name and version]
-        - Human Roles: [specific actions taken]
-        - AI Roles: [specific actions taken]
-
-        Requirements:
-        - Calculate percentages based on actual contribution (ideation, drafting, editing, decision-making)
-        - Be specific about methods (prompting, iterative editing, research, code generation)
-        - List concrete roles, not abstractions
-        - Output only the label, ready to copy-paste</code></pre>
-            <button onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent)">Copy Prompt</button>
-          </div>
-        </section>
-
-        <!-- Generator -->
-        <section id="generator">
-            <div class="generator">
-                <h2 style="margin-top: 0;">Label Generator</h2>
-                <p style="margin-bottom: 30px;">Fill out the form below to generate your Provenance Label.</p>
-
-                <form id="labelForm">
-                    <div class="form-group">
-                        <label for="created">Created Date/Time (UTC)*</label>
-                        <input type="datetime-local" id="created" required>
-                    </div>
-
-                    <div class="checkbox-group form-group">
-                        <input type="checkbox" id="includeUpdated">
-                        <label for="includeUpdated" style="margin-bottom: 0;">Include Updated timestamp</label>
-                    </div>
-
-                    <div class="form-group hidden" id="updatedGroup">
-                        <label for="updated">Updated Date/Time (UTC)</label>
-                        <input type="datetime-local" id="updated">
-                    </div>
-
-                    <div class="checkbox-group form-group">
-                        <input type="checkbox" id="wasEdited">
-                        <label for="wasEdited" style="margin-bottom: 0;">Label was edited after AI generation</label>
-                    </div>
-
-                    <div class="percentage-group">
-                        <div class="form-group">
-                            <label for="humanPercent">Human Contribution (%)*</label>
-                            <input type="number" id="humanPercent" min="0" max="100" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="aiPercent">AI Contribution (%)*</label>
-                            <input type="number" id="aiPercent" min="0" max="100" required>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="aiModels">AI Models Used</label>
-                        <input type="text" id="aiModels" placeholder="e.g., Claude Sonnet 4.5, GPT-4">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="processNotes">Process Notes* (describe collaboration)</label>
-                        <textarea id="processNotes" required placeholder="1-2 sentences describing how human and AI collaborated"></textarea>
-                    </div>
-
-                    <div class="form-group hidden" id="adjustmentsGroup">
-                        <label for="adjustments">Adjustments* (required if edited)</label>
-                        <textarea id="adjustments" placeholder="Explain what changed from AI's original calculation"></textarea>
-                    </div>
-
-                    <button type="submit" class="button" style="width: 100%;">Generate Label</button>
-                </form>
-
-                <div id="outputSection" class="hidden">
-                    <div id="output"></div>
-                    <div class="output-buttons">
-                        <button class="button" onclick="copyLabel()">Copy to Clipboard</button>
-                        <button class="button button-secondary" onclick="downloadLabel()">Download as .txt</button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Examples -->
-        <section>
+        <section id="examples">
             <h2>Examples</h2>
 
-            <h3>Blog Post (High AI)</h3>
-            <div class="example">PROVENANCE LABEL v1.0
-Created: 2026-02-10 14:30 UTC
-Edited: No
+            <h3>Blog Post — high AI contribution</h3>
+            <div class="example-label">Short</div>
+            <div class="label-badge">PL v1.0 | Shelton Davis | 2026-02-10 | Human 30% · AI 70% · Claude Sonnet 4.6</div>
+            <div class="example-label">Long</div>
+            <div class="example-block">@provenance 1.0
+author: Shelton Davis
+date: 2026-02-10
+human: 30
+ai: 70
+tools: Claude Sonnet 4.6
+note: Human provided outline and key arguments. AI drafted full post. Human edited for voice and cut 40% of output.</div>
 
-Human contribution: 30%
-AI contribution: 70%
-AI models used: Claude Sonnet 4.5
+            <h3>Code Documentation — low AI contribution</h3>
+            <div class="example-label">Short</div>
+            <div class="label-badge">PL v1.0 | Shelton Davis | 2026-02-09 | Human 85% · AI 15% · GitHub Copilot</div>
+            <div class="example-label">Long</div>
+            <div class="example-block">@provenance 1.0
+author: Shelton Davis
+date: 2026-02-09
+human: 85
+ai: 15
+tools: GitHub Copilot
+note: Human wrote all logic and structure. AI autocompleted boilerplate. Human accepted 60% of suggestions.</div>
 
-Process notes: Human provided outline and key arguments. AI drafted full post. Human edited for voice and cut 40% of AI output for brevity.</div>
-
-            <h3>Code Documentation (Low AI)</h3>
-            <div class="example">PROVENANCE LABEL v1.0
-Created: 2026-02-09 22:15 UTC
-Edited: No
-
-Human contribution: 85%
-AI contribution: 15%
-AI models used: GitHub Copilot
-
-Process notes: Human wrote all logic and structure. AI autocompleted boilerplate and suggested variable names. Human reviewed and accepted 60% of AI suggestions.</div>
-
-            <h3>Art Project (Collaborative)</h3>
-            <div class="example">PROVENANCE LABEL v1.0
-Created: 2026-02-01 09:00 UTC
-Updated: 2026-02-10 16:45 UTC
-Edited: Yes
-
-Human contribution: 60%
-AI contribution: 40%
-AI models used: Midjourney v6, Claude Sonnet 4.5
-
-Process notes: Human created initial sketches and concept. AI generated base images from prompts. Human composited, color-graded, and added hand-drawn elements. Iterated 3x.
-
-Adjustments: AI calculated 50/50. Human adjusted to 60/40 to reflect manual compositing and color grading work.</div>
+            <h3>Republished work — with shared-by field</h3>
+            <div class="example-label">Long</div>
+            <div class="example-block">@provenance 1.0
+author: Original Author Name
+date: 2026-02-01
+human: 60
+ai: 40
+tools: Midjourney v6, Claude Sonnet 4.6
+shared-by: Shelton Davis
+note: Original creator provided concept and compositing. AI generated base images. Shared with permission.</div>
         </section>
 
-        <!-- FAQ -->
+        <hr class="section-divider">
+
         <section>
             <h2>FAQ</h2>
 
@@ -563,208 +414,82 @@ Adjustments: AI calculated 50/50. Human adjusted to 60/40 to reflect manual comp
                 <h3>Is this anti-AI?</h3>
                 <p>No. It assumes AI collaboration can be valuable when disclosed honestly.</p>
             </div>
-
             <div class="faq-item">
                 <h3>How does the AI calculate percentages?</h3>
-                <p>The AI tracks who initiated content, who made edits, who drove key decisions, and what percentage of final output came from each contributor. It's algorithmic but not perfect—human approval is the final step.</p>
+                <p>It tracks who initiated content, who made decisions, who edited, and what percentage of final output came from each contributor. It's an estimate — your approval is the final step.</p>
             </div>
-
-            <div class="faq-item">
-                <h3>What if I'm working with an AI that doesn't track this automatically?</h3>
-                <p>Ask it to track manually: "Let's use Provenance Label standards." Most modern AIs can track collaboration if prompted. For existing work, you can estimate and use this generator.</p>
-            </div>
-
             <div class="faq-item">
                 <h3>Do the percentages have to be exact?</h3>
-                <p>No. The AI estimates based on session data. You adjust if needed. Aim for honest, not perfect.</p>
+                <p>No. Aim for honest, not perfect.</p>
             </div>
-
+            <div class="faq-item">
+                <h3>What if my AI doesn't track this automatically?</h3>
+                <p>Use the prompt above. Most modern AI tools can track collaboration if asked. For existing work, estimate retroactively.</p>
+            </div>
             <div class="faq-item">
                 <h3>Can I modify the label format?</h3>
-                <p>Yes. It's open. But if you change the format significantly, version it (v1.1, v2.0) or call it something else.</p>
+                <p>Yes. It's open. If you change it significantly, version it (v1.1, v2.0). See the <a href="/spec">Spec</a> for the full syntax rules.</p>
             </div>
-
-            <div class="faq-item">
-                <h3>Does this protect against plagiarism?</h3>
-                <p>No. Provenance Labels disclose the collaboration process between human and AI, but don't verify that contributions are original. Think of it like a nutrition label—it tells you what's in the product, not whether the ingredients are ethically sourced. Use plagiarism detection tools separately if content verification is needed.</p>
-            </div>
-
             <div class="faq-item">
                 <h3>Can Provenance Labels be faked?</h3>
-                <p>Yes. Like any self-disclosure system, it relies on creator integrity. Your reputation is on the line.</p>
+                <p>Yes, like any self-disclosure system. It relies on creator integrity. Your reputation is on the line.</p>
             </div>
-
             <div class="faq-item">
-                <h3>What if the AI and I disagree on the percentages?</h3>
-                <p>You have final say. Adjust the numbers, mark as "Edited: Yes" and explain in Adjustments field.</p>
+                <h3>Does this protect against plagiarism?</h3>
+                <p>No. This is disclosure, not verification. Think nutrition label — it tells you what's in it, not whether the ingredients are ethically sourced.</p>
             </div>
         </section>
 
-        <!-- About -->
-        <section id="about-project">
-            <div class="label-box">
-                <div class="label-header">
-                    <h2>About</h2>
-                </div>
-                <p>Created by <strong>Shelton Davis</strong> (Helper-ID, Empathy Lab) in February 2026.</p>
-                <p>Born from a blog collaboration that needed better disclosure.</p>
-                <p>Open standard. Free forever. Version 1.0.</p>
+        <hr class="section-divider">
 
-                <h3>This documentation's Provenance Label:</h3>
-                <div class="example" style="margin-top: 15px;">PROVENANCE LABEL v1.0
-Created: 2026-02-10 20:30 UTC
-Edited: No
+        <section id="about">
+            <h2>About</h2>
+            <p>Created by <strong>Shelton Davis</strong> (Helper-ID, Empathy Lab) in February 2026. Born from a blog collaboration that needed better disclosure. Open standard. Free forever.</p>
+            <p style="font-size:15px; color:var(--gray-dark);">
+                GitHub: <a href="https://github.com/provenance-label/provenance-label" target="_blank">github.com/provenance-label</a><br>
+                License: CC BY 4.0 (standard) / MIT (code)<br>
+                Contact: shelton@theempathylab.com
+            </p>
 
-Human contribution: 60%
-AI contribution: 40%
-AI models used: Claude Sonnet 4.5
-
-Process notes: Human provided background, philosophy, and constraints. Set sprint structure and made all key decisions. AI organized content, drafted code and copy, proposed structures. Human edited for voice and removed AI verbosity.</div>
-
-                <p style="margin-top: 30px;">
-                    <strong>GitHub:</strong> <a href="https://github.com/provenance-label/provenance-label" target="_blank">github.com/provenance-label</a><br>
-                    <strong>License:</strong> CC BY 4.0 (standard) / MIT (code)<br>
-                    <strong>Contact:</strong> [your email]
-                </p>
+            <h3>This site's Provenance Label</h3>
+            <div class="pl-self">
+                <div class="pl-self-header">Provenance Label — provenance-label.org</div>
+                <div class="pl-self-body">@provenance 1.0
+author: Shelton Davis
+date: 2026-02-17
+human: 60
+ai: 40
+tools: Claude Sonnet 4.6
+note: Human provided philosophy, constraints, and all key decisions. AI organized content, drafted code and copy. Human edited for voice.</div>
             </div>
         </section>
 
-        <footer>
-            <p>&copy; 2026 Provenance Label. Open standard, free to use.</p>
-            <p><a href="https://github.com/provenance-label/provenance-label" target="_blank" style="color: #2d2d2d;">View on GitHub</a></p>
-        </footer>
     </div>
 
+    <footer>
+        <span>Provenance Label v1.0 — CC BY 4.0 / MIT</span>
+        <span>
+            <a href="/spec">Spec</a> &nbsp;·&nbsp;
+            <a href="https://github.com/provenance-label/provenance-label" target="_blank">GitHub</a>
+        </span>
+    </footer>
+
     <script>
-        // Auto-populate current datetime
-        function setCurrentDateTime() {
-            const now = new Date();
-            const offset = now.getTimezoneOffset() * 60000;
-            const localISOTime = (new Date(now - offset)).toISOString().slice(0, 16);
-            document.getElementById('created').value = localISOTime;
-        }
-        setCurrentDateTime();
-
-        // Toggle updated timestamp field
-        document.getElementById('includeUpdated').addEventListener('change', function() {
-            const updatedGroup = document.getElementById('updatedGroup');
-            if (this.checked) {
-                updatedGroup.classList.remove('hidden');
-                const now = new Date();
-                const offset = now.getTimezoneOffset() * 60000;
-                const localISOTime = (new Date(now - offset)).toISOString().slice(0, 16);
-                document.getElementById('updated').value = localISOTime;
-            } else {
-                updatedGroup.classList.add('hidden');
-            }
-        });
-
-        // Toggle adjustments field
-        document.getElementById('wasEdited').addEventListener('change', function() {
-            const adjustmentsGroup = document.getElementById('adjustmentsGroup');
-            if (this.checked) {
-                adjustmentsGroup.classList.remove('hidden');
-                document.getElementById('adjustments').required = true;
-            } else {
-                adjustmentsGroup.classList.add('hidden');
-                document.getElementById('adjustments').required = false;
-            }
-        });
-
-        // Auto-balance percentages
-        document.getElementById('humanPercent').addEventListener('input', function() {
-            const aiPercent = 100 - parseInt(this.value || 0);
-            if (aiPercent >= 0 && aiPercent <= 100) {
-                document.getElementById('aiPercent').value = aiPercent;
-            }
-        });
-
-        document.getElementById('aiPercent').addEventListener('input', function() {
-            const humanPercent = 100 - parseInt(this.value || 0);
-            if (humanPercent >= 0 && humanPercent <= 100) {
-                document.getElementById('humanPercent').value = humanPercent;
-            }
-        });
-
-        // Form submission
-        document.getElementById('labelForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-
-            // Validate percentages add to 100
-            const humanPercent = parseInt(document.getElementById('humanPercent').value);
-            const aiPercent = parseInt(document.getElementById('aiPercent').value);
-
-            if (humanPercent + aiPercent !== 100) {
-                alert('Human and AI percentages must add up to 100%');
-                return;
-            }
-
-            // Generate label
-            let label = 'PROVENANCE LABEL v1.0\n';
-
-            // Created date
-            const created = new Date(document.getElementById('created').value);
-            label += `Created: ${created.toISOString().slice(0, 16).replace('T', ' ')} UTC\n`;
-
-            // Updated date (if included)
-            if (document.getElementById('includeUpdated').checked) {
-                const updated = new Date(document.getElementById('updated').value);
-                label += `Updated: ${updated.toISOString().slice(0, 16).replace('T', ' ')} UTC\n`;
-            }
-
-            // Edited status
-            const wasEdited = document.getElementById('wasEdited').checked;
-            label += `Edited: ${wasEdited ? 'Yes' : 'No'}\n\n`;
-
-            // Contributions
-            label += `Human contribution: ${humanPercent}%\n`;
-            label += `AI contribution: ${aiPercent}%\n`;
-
-            // AI models
-            const aiModels = document.getElementById('aiModels').value.trim();
-            if (aiModels) {
-                label += `AI models used: ${aiModels}\n`;
-            }
-
-            // Process notes
-            label += `\nProcess notes: ${document.getElementById('processNotes').value.trim()}`;
-
-            // Adjustments (if edited)
-            if (wasEdited) {
-                const adjustments = document.getElementById('adjustments').value.trim();
-                if (adjustments) {
-                    label += `\n\nAdjustments: ${adjustments}`;
-                }
-            }
-
-            // Display output
-            document.getElementById('output').textContent = label;
-            document.getElementById('outputSection').classList.remove('hidden');
-            document.getElementById('outputSection').scrollIntoView({ behavior: 'smooth' });
-        });
-
-        // Copy to clipboard
-        function copyLabel() {
-            const output = document.getElementById('output').textContent;
-            navigator.clipboard.writeText(output).then(function() {
-                alert('Label copied to clipboard!');
-            }, function() {
-                alert('Failed to copy. Please select and copy manually.');
-            });
+        function copyPrompt() {
+            const text = document.getElementById('promptText').textContent;
+            const btn = document.getElementById('copyPromptBtn');
+            navigator.clipboard.writeText(text).then(() => {
+                btn.textContent = 'Copied';
+                btn.classList.add('copied');
+                setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2000);
+            }).catch(() => { btn.textContent = 'Select manually'; });
         }
 
-        // Download as .txt
-        function downloadLabel() {
-            const output = document.getElementById('output').textContent;
-            const blob = new Blob([output], { type: 'text/plain' });
-            const url = window.URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'provenance-label.txt';
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            window.URL.revokeObjectURL(url);
+        function showOutput(type, el) {
+            document.querySelectorAll('.output-panel').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById('output-' + type).classList.add('active');
+            el.classList.add('active');
         }
     </script>
 </body>
